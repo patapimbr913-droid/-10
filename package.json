@@ -1,0 +1,11 @@
+{
+  "name": "guess-number",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "aiot build"
+  },
+  "devDependencies": {
+    "aiot-toolkit": "latest"
+  }
+}

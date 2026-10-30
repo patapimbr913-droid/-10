@@ -1,0 +1,15 @@
+{
+  "package": "com.example.guessnumber",
+  "name": "Угадай число",
+  "versionName": "1.0.0",
+  "versionCode": 1,
+  "minPlatformVersion": 1000,
+  "icon": "/common/logo.png",
+  "features": [],
+  "config": { "logLevel": "log" },
+  "router": {
+    "entry": "pages/index",
+    "pages": { "pages/index": { "component": "index" } }
+  },
+  "display": { "titleBar": false }
+}

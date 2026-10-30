@@ -1,0 +1,58 @@
+<template>
+  <div class="wrap">
+    <text class="hint">{{ hint }}</text>
+    <text class="tries">Попыток: {{ tries }}</text>
+    <text class="num">{{ guess }}</text>
+    <div class="row">
+      <input type="button" class="b" value="-10" onclick="change(-10)" />
+      <input type="button" class="b" value="-1" onclick="change(-1)" />
+      <input type="button" class="b" value="+1" onclick="change(1)" />
+      <input type="button" class="b" value="+10" onclick="change(10)" />
+    </div>
+    <input type="button" class="ok" value="{{ over ? 'Заново' : 'Проверить' }}" onclick="check" />
+  </div>
+</template>
+
+<style>
+.wrap { flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; background-color: #000000; }
+.hint { font-size: 28px; color: #ffffff; text-align: center; margin-bottom: 10px; }
+.tries { font-size: 24px; color: #888888; }
+.num { font-size: 90px; color: #ffcc00; margin: 20px 0; }
+.row { margin-bottom: 20px; }
+.b { width: 80px; height: 70px; margin: 0 4px; font-size: 26px; background-color: #333333; color: #ffffff; border-radius: 16px; }
+.ok { width: 300px; height: 80px; font-size: 30px; background-color: #2e7d32; color: #ffffff; border-radius: 40px; }
+</style>
+
+<script>
+export default {
+  private: { guess: 50, tries: 7, secret: 1, over: false, hint: '' },
+  onInit() { this.newGame() },
+  newGame() {
+    this.secret = Math.floor(Math.random() * 100) + 1
+    this.guess = 50
+    this.tries = 7
+    this.over = false
+    this.hint = 'Загадано число от 1 до 100'
+  },
+  change(d) {
+    if (this.over) return
+    let g = this.guess + d
+    if (g < 1) g = 1
+    if (g > 100) g = 100
+    this.guess = g
+  },
+  check() {
+    if (this.over) { this.newGame(); return }
+    this.tries--
+    if (this.guess === this.secret) {
+      this.hint = 'Верно! Победа!'
+      this.over = true
+    } else if (this.tries <= 0) {
+      this.hint = 'Проиграл. Было ' + this.secret
+      this.over = true
+    } else {
+      this.hint = this.guess < this.secret ? 'Больше ↑' : 'Меньше ↓'
+    }
+  }
+}
+</script>
